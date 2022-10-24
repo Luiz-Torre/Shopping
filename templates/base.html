@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>
+        {% block titulo %}
+            Título default
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+
+</head>
+<body>
+    {% block corpo %}
+    {% endblock %}
+
+    {% block rodape %}
+        <div class="footer row justify-content-md-center">
+    <div class="footerpt1">
+
+      <h4>Shopping Lorem Ipsum</h4>
+      <br>
+      <h7>Siga a gente nas Redes Sociais</h7>
+    </div>
+
+
+    <div class="footerpt1">
+
+      <div style='font-size:15px'> Endereço</div>
+      <div style='font-size:8px'> Rua do Shopping 123, bloco 48</div>
+      <br>
+      <div style='font-size:15px'> Para mais Informações</div>
+      <div style='font-size:8px'> (55)1234-5678</div>
+
+    </div>
+
+    <div class="footerpt1">
+
+      <div style='font-size:15px'> Horário de Funcionamento:
+      </div>
+      <div style='font-size:10px'>Lojas e Quiosques:</div>
+      <div style='font-size:8px'>Segunda à Sábado, das 10h às 22h</div>
+      <div style='font-size:8px'>Domingos e Feriados, das 14h às 20h</div>
+
+      <br>
+      <div style='font-size:15px'> Alimentação:</div>
+      <div style='font-size:8px'> Todos os dias, das 11h às 22h</div>
+
+    </div>
+  </div>
+
+  </div>
+    {% endblock %}
+</body>
+  <script src="js/jquery-3.3.1.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <script src="js/script.js"></script>
+</html>

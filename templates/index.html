@@ -1,12 +1,232 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Index
+{% endblock %}
+{% block corpo %}
+<nav class="navbar navbar-light bg-light navbar-expand-md fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{%  url 'index' %}"><img src="{% static 'images//logo.jfif'%}" alt="Logo Shopping"
+          style="width: 80px"></a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+        aria-expanded="false" aria-label="Botão de navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+
+        <div class="navbar-nav mx-auto ">
+          <a class="nav-link nav-item pr-5" href="{%  url 'sobre' %}">Sobre o Shopping</a>
+          <div class="dropdown">
+
+            <a class="nav-link nav-item pr-5"  href="{%  url 'lazer' %}">Lazer</a>
+          </div>
+          <a class="nav-link nav-item pr-5" href="{%  url 'contato' %}">Contato <i class="fa-solid fa-phone"></i></a>
+        </div>
+      </div>
+
+
+    </div>
+
+  </nav>
+
+
+  <div id="carouselShopping" class="carousel slide " style="margin-top:
+  100px;" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselShopping" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselShopping" data-slide-to="1"></li>
+      <li data-target="#carouselShopping" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="{% static 'images/banner1.png' %}" alt="Relogio">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'images/banner2.jpg' %}" alt="Imagem da Segunda Propaganda">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'images/banner3.png' %}" alt="Imagem da Terceira Propaganda">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselShopping" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">voltar</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselShopping" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">avançar</span>
+    </a>
+  </div>
+
+  <div class="p-3 mb-2 bg-light text-dark text-center">
+    <h1>Conheça alguma de nossas lojas</h1>
+  </div>
+
+
+  <div class="row justify-content-md-center">
+
+    <div class="card mb-3 ml-5 mr-5 ">
+      <image src="{% static 'images/card1.png' %}" alt="Spoleto" title="Card com o logo e informações da loja do Spoleto">
+      <div class="card-body text-center">
+        <div class="text-center">
+          <h5 class="card-title">Spoleto</h5>
+          <p class="text-secondary font-weight-bold">Fast food</p>
+        </div>
+        <content>
+          <div>
+            <span id = "like" data-like = "30">30</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i  id="img_like" class="far fa-thumbs-up btn_like"></i>
+            </a>
+          </div>
+          <span id = "dislike" data-dislike = "7">7</span>
+          <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+            <i id="img_dislike"class="far fa-thumbs-down btn_dislike"></i>
+          </a>
+        </content>
+
+        <p class="card-text text-center">É a maior rede de culinária italiana do Brasil.</p>
+      </div>
+    </div>
+
+    <div class="card mb-3 mb-3 ml-5 mr-5">
+      <image src="{% static 'images/card2.png' %}" alt="Agua de Coco" title="Card com o logo e informações da loja da Água de Coco">
+      <div class="card-body text-center">
+        <div class="text-center">
+          <h5 class="card-title">Água de Coco</h5>
+          <p class="text-secondary font-weight-bold">Praia em seu lar</p>
+          <content>
+            <div>
+              <span id = "like2" data-like = "2">2</span>
+              <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+                <i  id="img_like2" class="far fa-thumbs-up btn_like"></i>
+              </a>
+            </div>
+            <span id = "dislike2" data-dislike = "35">35</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i id="img_dislike2"class="far fa-thumbs-down btn_dislike"></i>
+            </a>
+          </content>
+          <p class="card-text text-center">Maior vendedor de água de coco do Brasil.</p>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="card mb-3 ml-5 mr-5 ">
+      <image src="{% static 'images/card3.png' %}" alt="Baccio di LATTE"
+        title="Card com o logo e informações da loja da Sorveteria BACCIO di LATTE">
+      <div class="card-body text-center">
+          <h5 class="card-title">Baccio di LATTE</h5>
+          <p class="text-secondary font-weight-bold">Sorveteria</p>
+        <content>
+            <div>
+              <span id = "like3" data-like = "80">80</span>
+              <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+                <i  id="img_like3" class="far fa-thumbs-up btn_like"></i>
+              </a>
+            </div>
+            <span id = "dislike3" data-dislike = "5">5</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i id="img_dislike3"class="far fa-thumbs-down btn_dislike"></i>
+            </a>
+          </content>
+        <p class="card-text text-center">Maior rede de Gellato Italiano agora perto de você.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-md-center">
+
+    <div class="card mb-3 ml-5 mr-5 ">
+      <image src="{% static 'images/card4.png' %}" alt="Loterias Caixa" data-toggle="tooltip" data-placement="bottom"
+        title="Card com o logo e informações da loja da Loterica Caixa">
+      <div class="card-body">
+        <div class="text-center">
+          <h5 class="card-title">Loterias Caixa</h5>
+          <p class="text-secondary font-weight-bold">Lotérica</p>
+
+          <content>
+            <div>
+              <span id = "like4" data-like = "0">0</span>
+              <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+                <i  id="img_like4" class="far fa-thumbs-up btn_like"></i>
+              </a>
+            </div>
+            <span id = "dislike4" data-dislike = "233">233</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i id="img_dislike4"class="far fa-thumbs-down btn_dislike"></i>
+            </a>
+          </content>
+        </div>
+        <p class="card-text text-center">Jogos da loterias, bilhete federal, raspadinhas.</p>
+      </div>
+    </div>
+
+    <div class="card mb-3 mb-3 ml-5 mr-5">
+      <image src="{% static 'images/card5.png' %}" alt="Lupo" data-toggle="tooltip" data-placement="bottom"
+        title="Card com o logo e informações da loja da Lupo">
+      <div class="card-body">
+        <div class="text-center">
+          <h5 class="card-title">Lupo</h5>
+          <p class="text-secondary font-weight-bold">Moda</p>
+          <content>
+            <div>
+              <span id = "like5" data-like = "20">20</span>
+              <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+                <i  id="img_like5" class="far fa-thumbs-up btn_like"></i>
+              </a>
+            </div>
+            <span id = "dislike5" data-dislike = "20">20</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i id="img_dislike5"class="far fa-thumbs-down btn_dislike"></i>
+            </a>
+          </content>
+        </div>
+        <p class="card-text text-center">Líder nacional no mercado de underwear.</p>
+      </div>
+    </div>
+
+    <div class="card mb-3 ml-5 mr-5 ">
+      <image src="{% static 'images/card6.png' %}" alt="ElementosExtras" data-toggle="tooltip" data-placement="bottom"
+        title="Card dizendo quais foram os elementos extras utilizados no projeto">
+      <div class="card-body">
+        <div class="text-center">
+          <h5 class="card-title">Elementos extras utilizados</h5>
+          <p class="text-secondary font-weight-bold">Tecnologia</p>
+          <content>
+            <div>
+              <span id = "like6" data-like = "977">977</span>
+              <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+                <i  id="img_like6" class="far fa-thumbs-up btn_like"></i>
+              </a>
+            </div>
+            <span id = "dislike6" data-dislike = "0">0</span>
+            <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
+              <i id="img_dislike6"class="far fa-thumbs-down btn_dislike"></i>
+            </a>
+          </content>
+        </div>
+        <p class="card-text text-center">img-fluid / alert / toast / progress / collapse</p>
+      </div>
+    </div>
+
+  </div>{% endblock %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Titulo</title>
-    <br><br>
-    <a hr
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+
 </head>
 <body>
-    {{texto}}
+
 </body>
 </html>
