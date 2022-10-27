@@ -1,12 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Titulo</title>
-    <br><br>
+{% extends "base.html" %}
+{% load static %}
 
-</head>
-<body>
-    {{texto}}
-</body>
-</html>
+{% block titulo %}
+    Sobre o Shopping
+{% endblock %}
+{% block corpo %}
+    <div class="sobrenos row">
+    <div class="mr-5">
+      <div class="mr-5">
+        <div class="mr-5" style='font-size:45px'>Estamos no Rio Shopping,</div>
+        <strong style='font-size:45px'>Aguardando vocês!</strong>
+        <br>
+        <div class="mt-1" style='font-size:15px'>Temos de tudo. Com o melhor que um shopping pode oferecer!</div>
+      </div>
+    </div>
+
+    <img class="img-fluid " id="imagemsobre" src="{% static 'images/imagemsobre.png' %}" alt="Imagem do Shopping" width="600"
+      height="400">
+  </div>
+
+  <div class="sobre2">
+    <div style='font-size:55px'>O Shopping
+    </div>
+    <div class="mt-1" style='font-size:17px'>Localizado em um dos endereços mais elegantes do Rio de Janeiro, o
+      Shopping<br> vai além de uma experiência de compras.
+
+      Com aproximadamente 94 mil metros<br> de área construída e com vista para um dos principais cartões portais da
+      cidade<br>, o morro do Corcovado, onde está localizado o Cristo Redentor, o espaço mescla<br> arte, gastronomia e
+      moda.</div>
+  </div>
+  </div>
+  <div class="sobre3 mt-5">
+    <div style='font-size:45px'>Informações Gerais
+    </div>
+    <p>
+      <a class="btn btn-light" data-toggle="collapse" href="#textocinema" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Cinema
+      </a>
+      <a class="btn btn-light" data-toggle="collapse" href="#textogaragem" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Garagem
+      </a>
+      <a class="btn btn-light" data-toggle="collapse" href="#textopessoa" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Inauguração e Fluxo de pessoa
+      </a>
+    </p>
+    <div class="collapse mr-5 mb-3" id="textocinema">
+      <div class="card card-body">
+        Nosso cinema apresenta 20 salas do maior luxo que um cinema pode oferecer. Aqui sua experiência será
+        inigualável. Não perca essa oportunidade e garanta já seu ingresso.
+      </div>
+    </div>
+    <div class="collapse mr-5 mb-3" id="textogaragem">
+      <div class="card card-body">
+        Nossa garagem é altamente segura, com diversos pontos de fiscalização. Aqui você sabe que seu bem estar é nosso
+        objetivo. Temos ao todo 8500 vagas. Para verificar disponibilidade baixe já nosso aplicativo na UFF Store.
+      </div>
+    </div>
+    <div class="collapse mr-5 mb-3" id="textopessoa">
+      <div class="card card-body">
+        Desde 2001 no mercado, nosso shopping tem um fluxo estimado de 5 milhões de pessoas por mês.
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}

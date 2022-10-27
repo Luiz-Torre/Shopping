@@ -7,43 +7,62 @@
 {% block corpo %}
 
 
-  <div class="p-3 mb-2 bg-light text-dark text-center">
+  <div class="p-3 mb-2 text-dark text-center">
     <h1>Nossos Filmes</h1>
   </div>
 
 
-  <div class="row justify-content-md-center">
 
-        {% for loja in lojas %}
+
+
+
+    <div>
+        {% if filmes %}
+    </div>
+         <div  style='font-size: 17px; margin-bottom: 28px'>
+      {% if filmes.has_other_pages %}
+         <ul class='pagination'>
+            {% if filmes.has_previous %}
+               <li class='page-item'><a class='page-link' href='?pagina={{ filmes.previous_page_number }}&nome={{ nome }}'>Anterior</a></li>
+            {% else %}
+               <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Anterior</a></li>
+            {% endif %}
+            {% for i in filmes.paginator.page_range %}
+               {% if filmes.number == i %}
+                  <li class='page-item active'><a class='page-link' href='#'>{{ i }} </a></li>
+               {% else %}
+                  <li class='page-item'><a class='page-link' href='?pagina={{ i }}&nome={{ nome }}'>{{ i }}</a></li>
+               {% endif %}
+            {% endfor %}
+            {% if filmes.has_next %}
+               <li class='page-item'><a class='page-link' href='?pagina={{ filmes.next_page_number }}&nome={{ nome }}'>Próxima</a></li>
+            {% else %}
+               <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Próxima</a></li>
+            {% endif %}
+         </ul>
+      {% endif %}
+   </div>
+    <div class="row justify-content-md-center">
+
+    {% for filme in filmes %}
             <div class ="col-lg-3 d-flex align-items-stretch">
                  <div class="card mb-3 mb-3 ml-5 mr-5">
-                  <image src ="{% static 'images/lojas/' %}{{ loja.imagem }}" alt="{{ loja.nome }}" title="Card com o logo e informações da loja do {{ loja.nome }}"></image>
+                  <image src ="{% static 'images/filmes/' %}{{ filme.imagem }}" alt="Imagem do Filme: {{ loja.nome }}" title="Card com o logo e informações do filme {{ filme.nome }}"></image>
                   <div class="card-body text-center">
                     <div class="text-center">
-                      <h5 class="card-title">{{ loja.nome }}</h5>
-                      <p class="text-secondary font-weight-bold">{{ loja.categoria }}</p>
-                    <content>
-                      <div>
-                        <span id = "like" data-like = "30">30</span>
-                        <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
-                          <i  id="img_like" class="far fa-thumbs-up btn_like"></i>
-                        </a>
-                      </div>
-                      <span id = "dislike" data-dislike = "7">7</span>
-                      <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
-                        <i id="img_dislike"class="far fa-thumbs-down btn_dislike"></i>
-                      </a>
-                    </content>
-
+                      <h5 class="card-title">{{ filme.nome }}</h5>
+                      <p class="text-secondary font-weight-bold">{{ filme.genero }}</p>
                     </div>
-
-                    <p class="card-text text-center">{{ loja.descricao }}</p>
+                    <p class="card-text text-center">{{ filme.descricao }}</p>
                   </div>
                 </div>
             </div>
 
         {% endfor %}
+        </div>
 
+        {% else%}
+            <h3>Não temos nenhum filme agendado no momento</h3>
+    {% endif %}
 
-  </div>
 {% endblock %}

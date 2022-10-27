@@ -25,6 +25,7 @@ urlpatterns = [
     path('contato', views.contato, name='contato'),
     path('loja', include('loja.urls')),
     path('cinema/', include('filme.urls')),
+    path('teatro/', include('teatro.urls')),
 
     path('admin/', admin.site.urls),
 ]

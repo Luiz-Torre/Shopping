@@ -49,19 +49,6 @@
                     <div class="text-center">
                       <h5 class="card-title">{{ loja.nome }}</h5>
                       <p class="text-secondary font-weight-bold">{{ loja.categoria }}</p>
-                    <content>
-                      <div>
-                        <span id = "like" data-like = "30">30</span>
-                        <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
-                          <i  id="img_like" class="far fa-thumbs-up btn_like"></i>
-                        </a>
-                      </div>
-                      <span id = "dislike" data-dislike = "7">7</span>
-                      <a href="javascript:void(0)" class="mr-2" style="text-decoration: none">
-                        <i id="img_dislike"class="far fa-thumbs-down btn_dislike"></i>
-                      </a>
-                    </content>
-
                     </div>
 
                     <p class="card-text text-center">{{ loja.descricao }}</p>
@@ -73,4 +60,5 @@
 
 
   </div>
+
 {% endblock %}

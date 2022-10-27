@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Teatro
+{% endblock %}
+{% block corpo %}
+
+
+  <div class="p-3 mb-2 text-dark text-center">
+    <h1>Nossos Peças de Teatro</h1>
+  </div>
+
+    <div>
+        {% if pecas %}
+    </div>
+    <div class="row justify-content-md-center">
+
+    {% for peca in pecas %}
+            <div class ="col-lg-3 d-flex align-items-stretch">
+                 <div class="card mb-3 mb-3 ml-5 mr-5">
+                  <image src ="{% static 'images/teatro/' %}{{ peca.imagem }}" alt="Imagem da Peça: {{ loja.nome }}" title="Card com o logo e informações do peça {{ peca.nome }}"></image>
+                  <div class="card-body text-center">
+                    <div class="text-center">
+                      <h5 class="card-title">{{ peca.nome }}</h5>
+                      <p class="text-secondary font-weight-bold">Sinopse</p>
+                    </div>
+                    <p class="card-text text-center">{{ peca.descricao }}</p>
+                  </div>
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+        {% else%}
+            <h3>Não temos nenhuma peça agendada no momento</h3>
+    {% endif %}
+
+
+{% endblock %}

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'loja',
     'categoria',
     'genero_filme',
-    'filme'
+    'filme',
+    'teatro'
 ]
 
 MIDDLEWARE = [

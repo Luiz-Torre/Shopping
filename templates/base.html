@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
@@ -36,7 +38,9 @@
           <a class="nav-link nav-item pr-5" href="{%  url 'sobre' %}">Sobre o Shopping</a>
           <a class="nav-link nav-item pr-5"  href="{%  url 'loja:lista_loja' %}">Nossas Lojas</a>
           <a class="nav-link nav-item pr-5"  href="{%  url 'filmes:filmes' %}">Cinema</a>
-          <a class="nav-link nav-item pr-5" href="{%  url 'contato' %}">Contato <i class="fa-solid fa-phone"></i></a>
+          <a class="nav-link nav-item pr-5"  href="{%  url 'teatro:teatro' %}">Teatro</a>
+
+            <!-- Em construção <a class="nav-link nav-item pr-5" href="#% url 'contato' %}">Contato <i class="fa-solid fa-phone"></i></a> -->
         </div>
       </div>
 
