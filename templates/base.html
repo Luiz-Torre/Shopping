@@ -4,18 +4,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <title>
-        {% block titulo %}
-            Título default
-        {% endblock %}
-    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <title> {% block titulo %}ShoppingMall{% endblock %}</title>
+    <style>
+        {% block estilo %}
+        {% endblock %}
+    </style>
+
+
 
 </head>
 <body>
+
+    <div id="container_all" class="container_all">
+    {% block cabecalho %}
+    <nav class="navbar navbar-light bg-light navbar-expand-md">
+    <div class="container">
+      <a class="navbar-brand" href="{%  url 'index' %}"><img src="{% static 'images//logo.jfif'%}" alt="Logo Shopping"
+          style="width: 80px"></a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+        aria-expanded="false" aria-label="Botão de navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+
+        <div class="navbar-nav mx-auto ">
+          <a class="nav-link nav-item pr-5" href="{%  url 'sobre' %}">Sobre o Shopping</a>
+          <a class="nav-link nav-item pr-5"  href="{%  url 'loja:lista_loja' %}">Nossas Lojas</a>
+          <a class="nav-link nav-item pr-5"  href="{%  url 'lazer' %}">Lazer</a>
+          <a class="nav-link nav-item pr-5" href="{%  url 'contato' %}">Contato <i class="fa-solid fa-phone"></i></a>
+        </div>
+      </div>
+
+
+    </div>
+
+  </nav>
+
+
+    {% endblock %}
+
     {% block corpo %}
     {% endblock %}
+    </div>
 
     {% block rodape %}
         <div class="footer row justify-content-md-center">
@@ -55,9 +90,18 @@
   </div>
     {% endblock %}
 </body>
-  <script src="js/jquery-3.3.1.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'js/jquery.mask.js' %}"></script>
+  <script src="{% static 'js/popper.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 
-  <script src="js/script.js"></script>
+  <script>
+    $(document).read(function (){
+
+        {% block domready %}
+        {% endblock %}
+    });
+  </script>
 </html>

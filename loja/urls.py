@@ -5,5 +5,5 @@ from loja import views
 app_name = 'loja'
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('lista_loja/', views.lista_loja, name='lista_loja')
 ]

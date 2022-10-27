@@ -1,16 +1,21 @@
 from django.shortcuts import render
 
+from loja.models import Loja
+
 
 def index(request):
-        frase = "Frase do index"
-        return render(request, 'index.html', {'texto': frase})
+    lista_de_lojas = Loja.objects.filter()[:6]
+    print(lista_de_lojas)
+    return render(request, 'index.html', {'lojas': lista_de_lojas})
+
 
 def sobre(request):
-        frase = "Frase do sobre"
-        return render(request, 'sobre.html', {'texto': frase})
+    return render(request, 'sobre.html')
+
+
 def contato(request):
-        frase = "Frase do contato"
-        return render(request, 'sobre.html', {'texto': frase})
+    return render(request, 'contato.html')
+
+
 def lazer(request):
-        frase = "Frase do lazer"
-        return render(request, 'sobre.html', {'texto': frase})
+    return render(request, 'lazer.html')

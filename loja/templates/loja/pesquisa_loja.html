@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Pesquisa de Lojas{% endblock %}
+{% block corpo %}
+
+    <div class="mb-4">
+        <h5>Pesquisa de Produtos</h5>
+        <hr class="mt-0">
+    </div>
+
+    <form action="" method="GET" class="mb-4">
+        <div class="form-group row" style="margin-bottom: 10px">
+            <label for="id_nome" class="col-lg-2 col-form-label font-weigth-bold">Nome</label>
+            <div class="col-lg-10">
+                {{ form.nome }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-10 offset-lg-2">
+                <button type="submit" class="btn btn-primary">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/skin/binoculo.png' %}" class="mr-2">Pesquisar
+                    </div>
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+    <div>
+        {% if lojas %}
+            </div>
+    <h5 class="mb-5"> Lista de Lojas</h5>
+    <table style="width: 100%" class="table table-striped table-sm table-bordered table-responsive mb-4">
+        <thead>
+            <tr>
+                <th class = "text-center">Imagem</th>
+                <th class = "text-center">Categoria</th>
+                <th class = "text-center">Nome</th>
+                <th class = "text-center">Descrição</th>
+                <th class = "text-center">Data de Inauguração</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loja in lojas %}
+                <tr>
+                    <td width="10%" class ="text-center align-middle">
+                        <img style="width: 80px" src ="{% static 'images/lojas/' %}{{ loja.imagem }}" alt="{{ loja.nome }}">
+                    </td>
+                <td width="10%" class ="text-center align-middle">
+                    {{loja.categoria}}
+                </td>
+                <td width="15%" class ="text-center align-middle">
+                    {{loja.nome}}
+                </td>
+                <td width="25%" class ="align-middle">
+                    {{loja.descricao}}
+                </td>
+                <td width="15%" class ="text-center align-middle">
+                    {{loja.data_cadastro | date:'d/m/Y'}}
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     <div style='font-size: 14px; margin-bottom: 28px'>
+      {% if lojas.has_other_pages %}
+         <ul class='pagination'>
+            {% if lojas.has_previous %}
+               <li class='page-item'><a class='page-link' href='?pagina={{ lojas.previous_page_number }}&nome={{ nome }}'>Anterior</a></li>
+            {% else %}
+               <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Anterior</a></li>
+            {% endif %}
+            {% for i in lojas.paginator.page_range %}
+               {% if lojas.number == i %}
+                  <li class='page-item active'><a class='page-link' href='#'>{{ i }} </a></li>
+               {% else %}
+                  <li class='page-item'><a class='page-link' href='?pagina={{ i }}&nome={{ nome }}'>{{ i }}</a></li>
+               {% endif %}
+            {% endfor %}
+            {% if lojas.has_next %}
+               <li class='page-item'><a class='page-link' href='?pagina={{ lojas.next_page_number }}&nome={{ nome }}'>Próxima</a></li>
+            {% else %}
+               <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Próxima</a></li>
+            {% endif %}
+         </ul>
+      {% endif %}
+   </div>
+        {% endif %}
+
+{% endblock %}
