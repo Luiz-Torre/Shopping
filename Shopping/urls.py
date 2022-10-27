@@ -24,6 +24,7 @@ urlpatterns = [
     path('lazer', views.lazer, name='lazer'),
     path('contato', views.contato, name='contato'),
     path('loja', include('loja.urls')),
+    path('cinema/', include('filme.urls')),
 
     path('admin/', admin.site.urls),
 ]
