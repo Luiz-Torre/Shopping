@@ -46,13 +46,19 @@
             {% for loja in lojas %}
                 <tr>
                     <td width="10%" class ="text-center align-middle">
-                        <img style="width: 80px" src ="{% static 'images/lojas/' %}{{ loja.imagem }}" alt="{{ loja.nome }}">
+                        <a href="{% url 'loja:exibe_loja' loja.id %}">
+                            <img style="width: 80px" src ="{{ loja.imagem.url}}" alt="{{ loja.nome }}">
+
+                        </a>
                     </td>
                 <td width="10%" class ="text-center align-middle">
                     {{loja.categoria}}
                 </td>
                 <td width="15%" class ="text-center align-middle">
-                    {{loja.nome}}
+                    <a href="{% url 'loja:exibe_loja' loja.id %}">
+                        {{loja.nome}}
+
+                    </a>
                 </td>
                 <td width="25%" class ="align-middle">
                     {{loja.descricao}}

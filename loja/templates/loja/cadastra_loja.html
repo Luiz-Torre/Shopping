@@ -133,3 +133,24 @@
 
 
 {% endblock %}
+
+
+{% block domready %}
+
+    $('#id_data_cadastro').datepicker({
+       changeMonth: true,
+       changeYear: true,
+       yearRange: "-3:+0",
+       dateFormat: 'dd/mm/yy',
+       dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+       dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+       dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+       monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+       monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+       nextText: 'Próximo',
+       prevText: 'Anterior',
+       showOn: 'focus',
+   })
+
+   $('#id_data_cadastro').mask('00/00/0000')
+{% endblock %}
