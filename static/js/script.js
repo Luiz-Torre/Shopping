@@ -10,15 +10,15 @@ $(function(){
   $("#botao-enviar").click(function(event){
     event.preventDefault();
     let validaCampos = validaCamposFunction()
-    if(validaCampos){
-        event.preventDefault();
-        $("#myAlert").css("display", "");
-        setTimeout(function () {
-            $("#form_contato").submit();
-    
-    
-        }, 5000);
-    }
+    // if(validaCampos){
+    //     event.preventDefault();
+    //     $("#myAlert").css("display", "");
+    //     setTimeout(function () {
+    //         $("#form_contato").submit();
+    //
+    //
+    //     }, 5000);
+    // }
 
   }
   )  

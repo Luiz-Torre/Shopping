@@ -5,6 +5,7 @@ from loja import views
 app_name = 'loja'
 
 urlpatterns = [
-    path('lista_loja/', views.lista_loja, name='lista_loja')
+    path('lista_loja/', views.lista_loja, name='lista_loja'),
+    path('cadastra_loja/', views.cadastra_loja, name='cadastra_loja')
 
 ]

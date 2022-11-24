@@ -23,8 +23,10 @@ urlpatterns = [
     path('sobre', views.sobre, name='sobre'),
     path('lazer', views.lazer, name='lazer'),
     path('contato', views.contato, name='contato'),
-    path('loja', include('loja.urls')),
+    path('loja/', include('loja.urls')),
     path('cinema/', include('filme.urls')),
+    path('pedido/', include('pedido.urls')),
+
     path('teatro/', include('teatro.urls')),
 
     path('admin/', admin.site.urls),
