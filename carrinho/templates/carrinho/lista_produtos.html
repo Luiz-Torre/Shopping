@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    Venda de Produtos
+{% endblock %}
+
+
+
+
+{% block corpo %}
+    <br>
+    <div id="form">
+
+    </div>
+
+
+        <table id = "tabela" class="table table-striped table-sm  justify-content-center">
+        <thead>
+                <tr>
+                    <th class = "text-center">Nome</th>
+                    <th class = "text-center">Categoria</th>
+                    <th class = "text-center">Preço</th>
+                    <th class = "text-center">Quantidade</th>
+
+                </tr>
+        </thead>
+            <tbody id="lista-produtos">
+                     {% include 'carrinho/pagina_de_produtos.html' %}
+
+            <tr>
+                  <td colspan="3">
+                     <strong style="margin-left: 10px">Total do carrinho</strong>
+                  </td>
+                  <td class="text-right pr-5">
+                      <strong id="valor-do-carrinho">R$ {{preco_total}}</strong>
+                  </td>
+                  <td></td>
+            </tr>
+            </tbody>
+            </table>
+
+    <!-- </div> -->
+
+{% endblock %}
+
+{% block domready %}
+    $.get("{% url 'carrinho:cadastra_produto' %}", function(response) {
+        $("#form").html(response);
+    })
+
+
+   var pagina = 1;
+   var empty_page = false;
+   var block_request = false;
+
+   if ($(window).width() >= 1200)
+      percentual = 22/100
+   else if ($(window).width() >= 992)
+      percentual = 30/100
+   else if ($(window).width() >= 768)
+      percentual = 40/100
+   else if ($(window).width() >= 576)
+      percentual = 60/100
+   else
+      percentual = 70/100
+
+   $(window).scroll(function() {
+      if  (($(document).height() - $(window).height() - $(window).scrollTop() < percentual * $(window).height())
+           && empty_page == false && block_request == false) {
+		   block_request = true;
+		   pagina += 1;
+		   $.get('?pagina=' + pagina, function(resposta) {
+		      if(resposta == '') {
+		         empty_page = true;
+		      }
+		      else {
+               block_request = false;
+               $('#lista-produtos').append(resposta);
+    	      }
+         });
+    	}
+   });
+
+
+       $("#tabela").on("blur", "input.quantidade", function() {
+      let valor = $(this).val()
+      if (valor < 1 || valor > 99) {
+         $(this).focus()
+         return
+      }
+
+      let form = $(this).parent()
+      let tr = form.parent().parent()
+      let url = form.attr("action")
+      let formData = form.serializeArray()
+      $.post(url, formData, function(resposta) {
+         tr.find(".preco-total").text(resposta.preco_total)
+             $("#valor-do-carrinho").text("R$: " + resposta.preco_total)
+
+      })
+   })
+
+   $("#tabela").on("click", ".remover", function() {
+      let form = $(this).parent()
+      form.append('<input type="hidden" name="quantidade" value="0">')
+      let tr = form.parent().parent()
+      let url = form.attr('action')
+      let formData = form.serializeArray()
+      $.post(url, formData, function(resposta) {
+
+         tr.fadeTo('slow', 0.3, function() {
+            $(this).remove()
+             tr.find(".preco-total").text(resposta.preco_total)
+             $("#valor-do-carrinho").text("R$: " + resposta.preco_total)
+         })
+      })
+   })
+
+{% endblock %}

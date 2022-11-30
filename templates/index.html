@@ -44,7 +44,7 @@
         {% for loja in lojas %}
             <div class ="col-lg-3 d-flex align-items-stretch">
                  <div class="card mb-3 mb-3 ml-5 mr-5">
-                  <image src ="{% static 'images/lojas/' %}{{ loja.imagem }}" alt="{{ loja.nome }}" title="Card com o logo e informações da loja do {{ loja.nome }}"></image>
+                  <image src ="{{ loja.imagem.url}}" alt="{{ loja.nome }}" title="Card com o logo e informações da loja do {{ loja.nome }}"></image>
                   <div class="card-body text-center">
                     <div class="text-center">
                       <h5 class="card-title">{{ loja.nome }}</h5>

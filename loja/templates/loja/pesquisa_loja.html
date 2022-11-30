@@ -38,6 +38,8 @@
                 <th class = "text-center">Imagem</th>
                 <th class = "text-center">Categoria</th>
                 <th class = "text-center">Nome</th>
+                <th class = "text-center">CNPJ</th>
+
                 <th class = "text-center">Descrição</th>
                 <th class = "text-center">Data de Inauguração</th>
             </tr>
@@ -45,25 +47,28 @@
         <tbody>
             {% for loja in lojas %}
                 <tr>
-                    <td width="10%" class ="text-center align-middle">
+                    <td style = "width: 15%" class ="text-center align-middle">
                         <a href="{% url 'loja:exibe_loja' loja.id %}">
                             <img style="width: 80px" src ="{{ loja.imagem.url}}" alt="{{ loja.nome }}">
 
                         </a>
                     </td>
-                <td width="10%" class ="text-center align-middle">
+                <td style = "width: 15%" class ="text-center align-middle">
                     {{loja.categoria}}
                 </td>
-                <td width="15%" class ="text-center align-middle">
+                <td style = "width: 15%" class ="text-center align-middle">
                     <a href="{% url 'loja:exibe_loja' loja.id %}">
                         {{loja.nome}}
 
                     </a>
                 </td>
-                <td width="25%" class ="align-middle">
+                    <td style = "width: 15%" class ="align-middle">
+                    {{loja.cnpj}}
+                </td>
+                <td style = "width: 25%" class ="align-middle">
                     {{loja.descricao}}
                 </td>
-                <td width="15%" class ="text-center align-middle">
+                <td style = "width: 15%" class ="text-center align-middle">
                     {{loja.data_cadastro | date:'d/m/Y'}}
                 </td>
                 </tr>

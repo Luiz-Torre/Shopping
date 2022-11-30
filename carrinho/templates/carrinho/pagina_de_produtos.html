@@ -1,0 +1,35 @@
+{% load static %}
+
+
+        {% for produto, form in listas %}
+            <tr>
+                <td class ="text-center">
+                    {{produto.nome }}
+                </td>
+                <td class ="text-center">
+                    {{produto.categoria}}
+                </td>
+                <td class ="text-center">
+                     {{produto.preco}}
+
+                </td>
+                    <td class ="text-center">
+                        <form class="mx-auto" style="width: 60px" action="{% url 'carrinho:atualiza_carrinho' %}" method="post" novalidate>
+                            {% csrf_token %}
+                                {{ form.produto_id }}
+                                {{form.quantidade }}
+                            <button style="margin-top: 0px; margin-bottom: 0px;
+                                          padding-top: 3px; padding-bottom: 3px;
+                                          width: 40px"
+                                type="button"
+                                class="btn btn-sm btn-danger remover"
+                                   tabindex="-1">
+                              <img src="{% static 'images/skin/remove.png' %}">
+                       </button>
+                        </form>
+
+
+                </td>
+                </tr>
+   {% endfor %}
+

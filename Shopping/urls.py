@@ -15,18 +15,20 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 
 from Shopping import views, settings
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('', views.index, name = 'index'),
+    path('carrinho/', include('carrinho.urls')),
     path('sobre', views.sobre, name='sobre'),
     path('lazer', views.lazer, name='lazer'),
     path('contato', views.contato, name='contato'),
     path('loja/', include('loja.urls')),
     path('cinema/', include('filme.urls')),
-    path('pedido/', include('pedido.urls')),
+    #path('pedido/', include('pedido.urls')),
 
     path('teatro/', include('teatro.urls')),
 

@@ -5,7 +5,7 @@ from categoria.models import Categoria
 
 
 class Loja(models.Model):
-    categoria = models.ForeignKey(Categoria, related_name='lojas', on_delete=models.DO_NOTHING)
+    categoria = models.ForeignKey(Categoria, related_name='produtos', on_delete=models.DO_NOTHING)
     nome = models.CharField(max_length=100, db_index=True, unique = True)
     slug = models.SlugField(max_length=100)
     imagem = models.ImageField(upload_to='images/')

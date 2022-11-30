@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'genero_filme',
     'filme',
     'teatro',
-    'pedido'
+    'pedido',
+    'carrinho'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+CARRINHO_SESSION_ID = 'carrinho'
