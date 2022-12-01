@@ -2,6 +2,7 @@ import locale
 from decimal import Decimal
 
 from django.contrib import messages
+from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.signing import Signer
 from django.http import HttpResponse, JsonResponse
@@ -31,6 +32,7 @@ def lista_produtos(request, slug_da_categoria=None):
         produtos = paginator.page(paginator.num_pages)
 
     carrinho = Carrinho_Function(request)
+    carrinho_form = CarrinhoForm()
 
     lista_de_forms = []
     for produto in produtos:
@@ -39,41 +41,32 @@ def lista_produtos(request, slug_da_categoria=None):
 
     preco_total = carrinho.get_preco_carrinho()
     if request.is_ajax():
-        return render(request, 'carrinho/pagina_de_produtos.html', {'listas': zip(produtos, lista_de_forms), 'preco_total': preco_total})
+        return render(request, 'carrinho/pagina_de_produtos.html', {'listas': zip(produtos, lista_de_forms), 'preco_total': preco_total, 'form': carrinho_form})
 
-    return render(request, 'carrinho/lista_produtos.html', {'listas': zip(produtos, lista_de_forms), 'preco_total': preco_total})
+    carrinho_form = CarrinhoForm()
+    return render(request, 'carrinho/lista_produtos.html', {'listas': zip(produtos, lista_de_forms), 'preco_total': preco_total, 'form': carrinho_form})
 
 
 
 def cadastra_produto(request):
 
     if request.POST:
-        carrinho_id = request.session.get('carrinho_id')
-        if carrinho_id:
-            carrinho = get_object_or_404(Carrinho, pk= carrinho_id)
-            carrinho_form = CarrinhoForm(request.POST, request.FILES, instance=carrinho)
-
-        else:
-            carrinho_form = CarrinhoForm(request.POST, request.FILES)
+        carrinho_form = CarrinhoForm(request.POST)
 
         if carrinho_form.is_valid():
-            carrinho = carrinho_form.save(commit=False)
-            carrinho.slug = slugify(carrinho.nome)
-            carrinho.save()
+            carrinho = carrinho_form.save()
             carrinho2 = Carrinho_Function(request)
             carrinho2.atualiza(carrinho.id, carrinho.quantidade)
             messages.add_message(request, messages.INFO, 'Produto cadastrado com sucesso')
-            return redirect('carrinho:lista_produtos')
+            carrinho.categoria = carrinho.categoria
+
+            ser_instance = serializers.serialize('json', [ carrinho, ])
+
+            return JsonResponse({"instance": ser_instance}, status=200)
+        else:
+            return JsonResponse({"error": carrinho_form.errors}, status=400)
     else:
-        try:
-            del request.session['carrinho_id']
-        except KeyError:
-            pass
-        carrinho_form = CarrinhoForm()
-
-        return render(request, 'carrinho/cadastra_produto.html', {'form': carrinho_form})
-
-
+        JsonResponse({"error": ""}, status=400)
 
 
 def atualiza_carrinho(request):

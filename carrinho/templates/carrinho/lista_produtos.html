@@ -12,7 +12,92 @@
 {% block corpo %}
     <br>
     <div id="form">
+        <form action="{% url 'carrinho:cadastra_produto' %}" method="POST" id="forms"
+             enctype="multipart/form-data" novalidate>
+          <div class="row mb-xl-3">
+             <div class="col-xl-6">
+                <div class="row">
+                   <label for="id_nome" class="col-xl-2 font-weight-bold">Nome</label>
+                   <div class="col-xl-10">
+                      {{ form.nome }}
+                      {% if form.nome.errors %}
+                         <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for error in form.nome.errors %}
+                               <small>{{ error }}</small>
+                            {% endfor %}
+                         </div>
+                      {% endif %}
+                   </div>
+                </div>
+             </div>
+          <div class="col-xl-6">
+                <div class="row">
+                   <label for="id_preco" class="col-xl-3 font-weight-bold">Preco</label>
+                   <div class="col-xl-9">
+                      {{ form.preco }}
+                      {% if form.preco.errors %}
+                         <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for error in form.preco.errors %}
+                               <small>{{ error }}</small>
+                            {% endfor %}
+                         </div>
+                      {% endif %}
+                   </div>
+                </div>
+             </div>
+          </div>
 
+          <div class="row mb-xl-3">
+             <div class="col-xl-6">
+                <div class="row">
+                   <label for="id_categoria" class="col-xl-2 font-weight-bold">Categoria</label>
+                   <div class="col-xl-10">
+                      {{ form.categoria }}
+                      {% if form.categoria.errors %}
+                         <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for error in form.categoria.errors %}
+                               <small>{{ error }}</small>
+                            {% endfor %}
+                         </div>
+                      {% endif %}
+                   </div>
+                </div>
+
+             </div>
+             <div class="col-xl-6">
+                <div class="row">
+                   <label for="id_quantidade" class="col-xl-3 font-weight-bold">Quantidade</label>
+                   <div class="col-xl-9">
+                      {{ form.quantidade }}
+                      {% if form.quantidade.errors %}
+                         <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for error in form.quantidade.errors %}
+                               <small>{{ error }}</small>
+                            {% endfor %}
+                         </div>
+                      {% endif %}
+                   </div>
+                </div>
+             </div>
+          </div>
+
+
+
+
+          <div class="row mb-5">
+             <div class="col-xl-6">
+                <div class="row">
+                   <div class="col-xl-10 offset-xl-2">
+                      {% csrf_token %}
+                      <button id="botao" type="submit" class="btn btn-primary">
+                            <img src="{% static 'images/skin/database_add.png' %}"> Cadastrar
+                      </button>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+       </form>
     </div>
 
 
@@ -31,10 +116,10 @@
 
             <tr>
                   <td colspan="3">
-                     <strong style="margin-left: 10px">Total do carrinho</strong>
+                     <strong style="margin-left: 10px">Valor Total do Carrinho em Reais</strong>
                   </td>
                   <td class="text-right pr-5">
-                      <strong id="valor-do-carrinho">R$ {{preco_total}}</strong>
+                      <strong id="valor-do-carrinho">{{preco_total}}</strong>
                   </td>
                   <td></td>
             </tr>
@@ -46,9 +131,62 @@
 {% endblock %}
 
 {% block domready %}
-    $.get("{% url 'carrinho:cadastra_produto' %}", function(response) {
-        $("#form").html(response);
+
+
+     $("#forms").submit(function (e) {
+        e.preventDefault();
+
+        var serializedData = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'carrinho:cadastra_produto' %}",
+            data: serializedData,
+            success: function (response) {
+
+                var instance = JSON.parse(response["instance"]);
+                console.log(instance)
+
+                var fields = instance[0]["fields"];
+                var id = instance[0]["pk"];
+
+                console.log(fields, id)
+
+                $("#lista-produtos").prepend(
+                    `<tr>
+                <td class ="text-center">
+                    ${fields["nome"]||""}
+                </td>
+                <td class ="text-center">
+                    ${fields["categoria"]||""}
+                </td>
+                <td class ="text-center">
+                     ${fields["preco"]||""}
+
+                </td>
+                <td class="text-center">
+                        <form class="mx-auto" style="width: 60px" action="/carrinho/atualiza_carrinho/" method="post" novalidate="">
+                            {% csrf_token %}
+                                <input type="hidden" name="produto_id" value='${id}' id="id_produto_id">
+                                <input type="text" name="quantidade" value='${fields["quantidade"]||""}' class="form-control-sm quantidade " style="text-align: center;  width: 70px;" onkeypress="return (event.charCode>=48 &amp;&amp; event.charCode <=57" required="" id="id_quantidade">
+                            <button style="margin-top: 0px; margin-bottom: 0px;
+                                          padding-top: 3px; padding-bottom: 3px;
+                                          width: 40px" type="button" class="btn btn-sm btn-danger remover" tabindex="-1">
+                              <img src="/static/images/skin/remove.png">
+                       </button>
+                        </form>
+                </td>
+                </tr>`
+                )
+                 console.log(fields.quantidade * fields.preco)
+                 $("#valor-do-carrinho").text(parseFloat(parseFloat($("#valor-do-carrinho").text().replace(',', '.')) + (fields.quantidade * fields.preco)).toFixed(2))
+                },
+            error: function (response) {
+                alert(response["responseJSON"]["error"]);
+            }
+        })
     })
+
 
 
    var pagina = 1;
@@ -97,7 +235,7 @@
       let formData = form.serializeArray()
       $.post(url, formData, function(resposta) {
          tr.find(".preco-total").text(resposta.preco_total)
-             $("#valor-do-carrinho").text("R$: " + resposta.preco_total)
+    $("#valor-do-carrinho").text(resposta.preco_total)
 
       })
    })
@@ -113,9 +251,10 @@
          tr.fadeTo('slow', 0.3, function() {
             $(this).remove()
              tr.find(".preco-total").text(resposta.preco_total)
-             $("#valor-do-carrinho").text("R$: " + resposta.preco_total)
+             $("#valor-do-carrinho").text(resposta.preco_total)
          })
       })
    })
 
 {% endblock %}
+
